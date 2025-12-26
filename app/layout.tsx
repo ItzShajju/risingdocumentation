@@ -10,8 +10,8 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Rising Documentation - Private Documentation Consultancy in Tirunelveli",
-  description: "Private consultancy service providing documentation assistance for property registration, marriage certificates, EC, and legal documents in Tirunelveli. We help you navigate government procedures - we are NOT a government portal. Professional, transparent, paid consultancy in Tamil and English.",
+  title: "Rising Documentation - Registration Solutions | Documentation Consultancy in Tirunelveli",
+  description: "Rising Documentation - Registration Solutions is a private consultancy service providing documentation assistance for property registration, marriage certificates, EC, and legal documents in Tirunelveli. We help you navigate government procedures - we are NOT a government portal. Professional, transparent, paid consultancy in Tamil and English.",
   keywords: [
     "documentation consultancy Tirunelveli",
     "private documentation service",
@@ -35,10 +35,10 @@ export const metadata: Metadata = {
     email: true,
   },
   openGraph: {
-    title: "Rising Documentation - Private Consultancy for Legal Documentation",
+    title: "Rising Documentation - Registration Solutions | Private Consultancy",
     description: "Private consultancy helping you with documentation procedures in Tirunelveli. We assist - NOT a government service. Paid professional guidance.",
     url: "https://risingdocumentation.com",
-    siteName: "Rising Documentation - Private Consultancy",
+    siteName: "Rising Documentation - Registration Solutions",
     locale: "en_IN",
     type: "website",
   },
