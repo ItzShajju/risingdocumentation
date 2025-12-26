@@ -1,12 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, Menu, X, Star, Users, Zap, Code, CheckCircle, Send, MapPin, Phone, Mail, ChevronRight, Globe } from 'lucide-react';
+import { ChevronDown, Menu, X, Star, Users, Zap, FileText, CheckCircle, Send, MapPin, Phone, Mail, ChevronRight, Globe, ShieldAlert, Award } from 'lucide-react';
 
 export default function Home() {
   const [language, setLanguage] = useState<'en' | 'ta'>('en');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [scrollY, setScrollY] = useState(0);
 
@@ -18,240 +17,228 @@ export default function Home() {
 
   const content = {
     en: {
-      nav: { home: 'Home', services: 'Services', about: 'About', testimonials: 'Testimonials', faq: 'FAQ', contact: 'Contact' },
+      complianceBar: "Private Consultancy Service • Not a Government Portal",
+      heroBadge: "Independent Private Service Provider",
+      nav: { home: 'Home', services: 'Services', about: 'About', testimonials: 'Feedback', faq: 'FAQ', contact: 'Contact' },
       hero: {
         title: 'Rising Documentation',
-        subtitle: 'Transform Your Knowledge Into Excellence',
-        description: 'Comprehensive documentation solutions with modern design, seamless integration, and powerful tools for your success.',
-        cta: 'Get Started Now',
+        subtitle: 'Professional Documentation Assistance',
+        description: 'Reliable guidance for all your legal and property documentation needs in Tirunelveli. We simplify complex procedures with expert assistance.',
+        warning: 'We are a private consultancy. we assist you with documentation - we do not provide government services.',
+        cta: 'Contact Consultant',
         stats: [
-          { label: 'Active Users', value: '10K+' },
-          { label: 'Documentation Pages', value: '500+' },
-          { label: 'Client Satisfaction', value: '99%' },
-          { label: 'Uptime', value: '99.9%' }
+          { label: 'Successful Consultations', value: '1000+' },
+          { label: 'Documentation Experts', value: '5+' },
+          { label: 'Local Experience', value: '10Y+' },
+          { label: 'Happy Clients', value: '98%' }
         ]
       },
       services: {
-        title: 'Our Premium Services',
-        subtitle: 'Everything you need to excel',
+        title: 'Our Consultancy Services',
+        subtitle: 'Expert assistance for your essential documentation',
         items: [
           {
-            icon: 'code',
-            title: 'Technical Documentation',
-            description: 'Create and maintain clear, comprehensive technical guides.',
-            price: '$29/month',
-            features: ['Unlimited Pages', 'Code Highlighting', 'Version Control', 'API Documentation']
+            icon: 'file',
+            title: 'Property Registration Assistance',
+            description: 'Step-by-step guidance for property registration and legal documentation.',
+            badge: 'Consultancy Service',
+            features: ['Document Verification', 'Drafting Support', 'Procedural Guidance', 'Local Expertise']
           },
           {
             icon: 'users',
-            title: 'Team Collaboration',
-            description: 'Work together seamlessly with advanced collaboration tools.',
-            price: '$49/month',
-            features: ['Multi-user Access', 'Real-time Editing', 'Comments & Reviews', 'Permission Management']
+            title: 'Marriage Registration Assistance',
+            description: 'Complete support for marriage certificate procedures and document preparation.',
+            badge: 'Consultancy Service',
+            features: ['Checklist Preparation', 'Form Filling Support', 'Guidance on Venue', 'Document Sorting']
           },
           {
             icon: 'zap',
-            title: 'Performance Analytics',
-            description: 'Track and optimize your documentation performance.',
-            price: '$79/month',
-            features: ['Usage Analytics', 'Search Insights', 'Performance Metrics', 'Custom Reports']
+            title: 'EC Retrieval Assistance',
+            description: 'Help in obtaining Encumbrance Certificates and property history reports.',
+            badge: 'Consultancy Service',
+            features: ['Fast Retrieval Support', 'Digital Copy Assistance', 'Verification Support', 'History Tracking']
           },
           {
             icon: 'globe',
-            title: 'Global Distribution',
-            description: 'Reach audiences worldwide with fast, reliable delivery.',
-            price: '$99/month',
-            features: ['CDN Integration', 'Multi-language Support', 'SEO Optimization', 'Analytics Dashboard']
+            title: 'Document Copy Assistance',
+            description: 'Assistance in getting certified copies of registered documents and deeds.',
+            badge: 'Consultancy Service',
+            features: ['Application Support', 'Follow-up Guidance', 'Certified Copy Help', 'Old Deed Search']
           }
         ]
       },
       about: {
         title: 'About Rising Documentation',
-        description: 'Founded with a vision to revolutionize how teams create and share knowledge, Rising Documentation has grown into a trusted platform serving thousands of organizations worldwide.',
-        founder: 'Shajju',
-        founderTitle: 'Founder & CEO',
-        founderBio: 'Tech enthusiast with 10+ years of experience in documentation and knowledge management.'
+        description: 'Rising Documentation is an independent private consultancy led by S. Jameela. Based in Tirunelveli, we provide professional assistance to individuals navigating the complexities of legal documentation. We pride ourselves on transparency, reliability, and local procedural expertise.',
+        disclaimer: 'Please note: We are NOT affiliated with any government department. Our fees are for consultancy and assistance services only.',
+        founder: 'S. Jameela',
+        founderTitle: 'Founder & Lead Consultant',
+        founderBio: 'Dedicated professional with extensive experience in documentation procedures and client guidance in Tamil Nadu.'
       },
       testimonials: {
-        title: 'What Our Clients Say',
-        subtitle: 'Real feedback from real users',
+        title: 'Client Feedback',
+        subtitle: 'What people say about our guidance',
         items: [
           {
-            text: 'Rising Documentation has completely transformed how our team manages knowledge. The interface is intuitive and the features are powerful!',
-            author: 'Sarah Johnson',
-            role: 'Project Manager',
-            company: 'Tech Corp'
+            text: 'The guidance provided was excellent. They made the complex property registration process so much easier for us.',
+            author: 'Ravi Kumar',
+            role: 'Property Owner',
+            company: 'Tirunelveli'
           },
           {
-            text: 'The best documentation platform we\'ve used. The collaboration features save us hours every week.',
-            author: 'Michael Chen',
-            role: 'Tech Lead',
-            company: 'Innovation Labs'
-          },
-          {
-            text: 'Outstanding support and continuously improving features. Highly recommended!',
-            author: 'Emma Davis',
-            role: 'Content Director',
-            company: 'Digital Solutions'
+            text: 'Very professional marriage documentation assistance. They knew exactly what we needed and guided us perfectly.',
+            author: 'Meena S.',
+            role: 'Client',
+            company: 'Tenkasi'
           }
         ]
       },
       faq: {
-        title: 'Frequently Asked Questions',
+        title: 'Common Questions',
         items: [
           {
-            question: 'How do I get started?',
-            answer: 'Simply sign up for free, create your first project, and start documenting. Our onboarding wizard will guide you through the setup process.'
+            question: 'Are you a government office?',
+            answer: 'No. We are a private consultancy service. We assist you in preparing documents and guide you through the process, but official registrations are done only at government offices.'
           },
           {
-            question: 'Can I import existing documentation?',
-            answer: 'Yes! We support importing from various formats including Markdown, HTML, and Word documents. Use our import tool to get started.'
+            question: 'What do your fees cover?',
+            answer: 'Our fees are for our professional time and expertise in assisting you with document preparation and guidance. Government fees are separate and paid directly to government departments.'
           },
           {
-            question: 'Is there a free plan?',
-            answer: 'Yes, we offer a free plan with basic features. Upgrade anytime to access premium features and advanced capabilities.'
-          },
-          {
-            question: 'What about data security?',
-            answer: 'We use enterprise-grade encryption, regular backups, and comply with GDPR, CCPA, and other data protection regulations.'
-          },
-          {
-            question: 'How is the billing calculated?',
-            answer: 'Billing is per project and based on usage. You can view detailed usage metrics in your dashboard and adjust your plan anytime.'
-          },
-          {
-            question: 'Do you offer API access?',
-            answer: 'Yes, our REST API allows you to integrate Rising Documentation with your existing tools and workflows.'
+            question: 'How do you help with property documents?',
+            answer: 'We help verify your existing documents, assist in drafting new deeds, and explain the step-by-step procedure required at the Registrar office.'
           }
         ]
       },
       contact: {
-        title: 'Get In Touch',
-        subtitle: 'We\'d love to hear from you',
-        form: { name: 'Your Name', email: 'Your Email', message: 'Your Message', send: 'Send Message' },
+        title: 'Consult with Us',
+        subtitle: 'Reach out for professional assistance',
+        form: { name: 'Your Name', email: 'Your Email', message: 'How can we help you?', send: 'Send Inquiry' },
         info: [
-          { icon: 'mail', label: 'Email', value: 'hello@risingdocs.com' },
-          { icon: 'phone', label: 'Phone', value: '+1 (555) 123-4567' },
-          { icon: 'location', label: 'Address', value: 'San Francisco, CA 94105' }
+          { icon: 'mail', label: 'Email', value: 'rrisingdocumentation@gmail.com' },
+          { icon: 'phone', label: 'Phone', value: '95855 51021' },
+          { icon: 'location', label: 'Office', value: 'Tirunelveli, Tamil Nadu' }
+        ]
+      },
+      legalSection: {
+        title: "⚖️ Legal Disclaimers",
+        points: [
+          "This is a private consultancy service and NOT a government portal.",
+          "We are not affiliated with, endorsed by, or representing any government department.",
+          "Government fees (for registration, etc.) must be paid separately to government offices.",
+          "We provide guidance and preparation assistance; we do not issue official documents.",
+          "Our services are subject to current government rules and regulations."
         ]
       }
     },
     ta: {
-      nav: { home: 'முகப்பு', services: 'சேவைகள்', about: 'பற்றி', testimonials: 'பின்னூட்டங்கள்', faq: 'கேள்வி-பதில்', contact: 'தொடர்பு' },
+      complianceBar: "தனியார் ஆலோசனை சேவை • அரசு தளம் அல்ல",
+      heroBadge: "சுயாதீன தனியார் சேவை வழங்குநர்",
+      nav: { home: 'முகப்பு', services: 'சேவைகள்', about: 'பற்றி', testimonials: 'பின்னூட்டம்', faq: 'கேள்விகள்', contact: 'தொடர்பு' },
       hero: {
         title: 'Rising Documentation',
-        subtitle: 'உங்கள் அறிவை சிறப்புக்கு மாற்றுங்கள்',
-        description: 'நவீன வடிவமைப்பு, மென்மையான ஒருங்கிணைப்பு மற்றும் சக்திशালী கருவிகளுடன் ஆவணன தீர்வுகள்.',
-        cta: 'இப்போது தொடங்குங்கள்',
+        subtitle: 'தொழில்முறை ஆவண ஆலோசனை',
+        description: 'திருநெல்வேலியில் உங்கள் சட்ட மற்றும் சொத்து ஆவணத் தேவைகளுக்கான நம்பகமான வழிகாட்டல்.',
+        warning: 'நாங்கள் ஒரு தனியார் ஆலோசனை மையம். நாங்கள் ஆவணங்கள் தயாரிப்பதில் உதவுகிறோம் - அரசு சேவைகளை நாங்கள் வழங்குவதில்லை.',
+        cta: 'ஆலோசகரைத் தொடர்பு கொள்ள',
         stats: [
-          { label: 'செயல்படும் பயனர்கள்', value: '10K+' },
-          { label: 'ஆவணப் பக்கங்கள்', value: '500+' },
-          { label: 'கிளையன்ட் திருப்தி', value: '99%' },
-          { label: 'இயக்க நேரம்', value: '99.9%' }
+          { label: 'வெற்றிகரமான ஆலோசனைகள்', value: '1000+' },
+          { label: 'ஆவண நிபுணர்கள்', value: '5+' },
+          { label: 'உள்ளூர் அனுபவம்', value: '10Y+' },
+          { label: 'திருப்தியடைந்த வாடிக்கையாளர்கள்', value: '98%' }
         ]
       },
       services: {
-        title: 'எங்கள் பிரீமியம் சேவைகள்',
-        subtitle: 'சிறப்பு அடைய வேண்டியவை',
+        title: 'எங்கள் ஆலோசனை சேவைகள்',
+        subtitle: 'உங்கள் அத்தியாவசிய ஆவணங்களுக்கான நிபுணர் உதவி',
         items: [
           {
-            icon: 'code',
-            title: 'தொழில்நுட்ப ஆவணங்கள்',
-            description: 'தெளிவான, விரிவான தொழில்நுட்ப வழிகாட்டுதல்களை உருவாக்கவும்.',
-            price: '₹2,400/மாস',
-            features: ['வரம்பற்ற பக்கங்கள்', 'குறியீடு முன்னிலைப்படுத்தல்', 'பதிப்பு கட்டுப்பாடு', 'API ஆவணங்கள்']
+            icon: 'file',
+            title: 'சொத்து பதிவு உதவி',
+            description: 'சொத்து பதிவு மற்றும் சட்ட ஆவணங்களுக்கான படிப்படியான வழிகாட்டல்.',
+            badge: 'ஆலோசனை சேவை',
+            features: ['ஆவண சரிபார்ப்பு', 'வரைவு உதவி', 'நடைமுறை வழிகாட்டல்', 'உள்ளூர் நிபுணத்துவம்']
           },
           {
             icon: 'users',
-            title: 'குழு ஒத்துழைப்பு',
-            description: 'மேம்பட்ட ஒத்துழைப்பு கருவிகளுடன் விரிவாக பணிபுரியுங்கள்.',
-            price: '₹4,000/மாส',
-            features: ['பல-பயனர் அணுகல்', 'நிஜ-நேர திருத்தம்', 'கருத்து மற்றும் மதிப்பாய்வு', 'அனுமதி நிர்வாகம்']
+            title: 'திருமண பதிவு உதவி',
+            description: 'திருமணச் சான்றிதழ் நடைமுறைகள் மற்றும் ஆவணத் தயாரிப்பிற்கான முழுமையான ஆதரவு.',
+            badge: 'ஆலோசனை சேவை',
+            features: ['சரிபார்ப்பு பட்டியல்', 'படிவம் நிரப்பும் உதவி', 'இட வழிகாட்டல்', 'ஆவண வரிசைப்படுத்துதல்']
           },
           {
             icon: 'zap',
-            title: 'செயல்திறன் பகுப்பாய்வு',
-            description: 'உங்கள் ஆவணப் செயல்திறனைக் கண்டறிந்து மேம்படுத்தவும்.',
-            price: '₹6,500/மாס',
-            features: ['பயன்பாட்டு பகுப்பாய்வு', 'தேடல் உள்ளீடுகள்', 'செயல்திறன் மெட்ரிக்ஸ்', 'தனிப்பயன் அறிக்கைகள்']
+            title: 'வில்லங்கச் சான்றிதழ் (EC) உதவி',
+            description: 'வில்லங்கச் சான்றிதழ்கள் மற்றும் சொத்து வரலாற்று அறிக்கைகளைப் பெறுவதில் உதவி.',
+            badge: 'ஆலோசனை சேவை',
+            features: ['வேகமான மீட்பு உதவி', 'டிஜிட்டல் நகல் உதவி', 'சரிபார்ப்பு ஆதரவு', 'வரலாறு கண்காணிப்பு']
           },
           {
             icon: 'globe',
-            title: 'உலகளாவிய விநியோகம்',
-            description: 'வேகமான, நம்பகமான விநியோகத்துடன் உலகளாவிய மக்களை அடையுங்கள்.',
-            price: '₹8,100/மாס',
-            features: ['CDN ஒருங்கிணைப்பு', 'பல-மொழி ஆதரவு', 'SEO மேலாண்மை', 'பகுப்பாய்வு டேஷ்போர்டு']
+            title: 'ஆவண நகல் பெறுதல் உதவி',
+            description: 'பதிவு செய்யப்பட்ட ஆவணங்கள் மற்றும் பத்திரங்களின் சான்றளிக்கப்பட்ட நகல்களைப் பெறுவதில் உதவி.',
+            badge: 'ஆலோசனை சேவை',
+            features: ['விண்ணப்ப ஆதரவு', 'பின்தொடர்தல் வழிகாட்டல்', 'நகல் உதவி', 'பழைய பத்திரத் தேடல்']
           }
         ]
       },
       about: {
         title: 'Rising Documentation பற்றி',
-        description: 'குழுக்கள் அறிவை உருவாக்கி பகிர்ந்துகொள்ளும் முறையை புரட்டுவதற்கான பார்வையுடன் நிறுவப்பட்ட Rising Documentation உலகளாவிய ஆயிரக்கணக்கான நிறுவனங்கள் நம்பகமான தளமாக வளர்ந்துள்ளது.',
-        founder: 'Shajju',
-        founderTitle: 'நிறுவனர் & முதல் நிர்வாகி',
-        founderBio: 'ஆவணங்கள் மற்றும் அறிவு நிர்வாகத்தில் 10+ ஆண்டுகளின் அனுபவத்தைக் கொண்ட தொழில்நுட்ப ஆர்வலர்.'
+        description: 'Rising Documentation என்பது எஸ். ஜமீலா தலைமையில் இயங்கும் ஒரு சுயாதீன தனியார் ஆலோசனை மையம். திருநெல்வேலியை அடிப்படையாகக் கொண்டு, ஆவணங்களின் சிக்கல்களைக் கையாளும் நபர்களுக்கு நாங்கள் தொழில்முறை உதவியை வழங்குகிறோம்.',
+        disclaimer: 'குறிப்பு: நாங்கள் எந்த அரசுத் துறையுடனும் இணைக்கப்படவில்லை. எங்களின் கட்டணம் ஆலோசனை மற்றும் உதவி சேவைகளுக்காக மட்டுமே.',
+        founder: 'எஸ். ஜமீலா',
+        founderTitle: 'நிறுவனர் & தலைமை ஆலோசகர்',
+        founderBio: 'தமிழ்நாட்டில் ஆவண நடைமுறைகள் மற்றும் வாடிக்கையாளர் வழிகாட்டலில் விரிவான அனுபவம் கொண்ட தொழில்முறை நிபுணர்.'
       },
       testimonials: {
-        title: 'எங்கள் கிளையன்டுகள் என்ன சொல்கிறார்கள்',
-        subtitle: 'உண்மையான பயனர்களிடமிருந்து உண்மையான கருத்துக்கள்',
+        title: 'வாடிக்கையாளர் பின்னூட்டம்',
+        subtitle: 'எங்கள் சேவையைப் பற்றி மக்கள் என்ன சொல்கிறார்கள்',
         items: [
           {
-            text: 'Rising Documentation எங்கள் குழு அறிவை நிர்வகிக்கும் முறையை முற்றிலுமாக மாற்றிவிட்டது. இন்টারফேஸ் உள்ளுணர்வாகவும் அம்சங்கள் சக்திशালीகவும் உள்ளது!',
-            author: 'சாராہ ஜான்சன்',
-            role: 'திட்ட பிரबन்ধक்',
-            company: 'Tech Corp'
+            text: 'வழிகாட்டல் சிறப்பாக இருந்தது. சிக்கலான சொத்துப் பதிவு முறையை அவர்கள் எங்களுக்கு மிகவும் எளிதாக்கினார்கள்.',
+            author: 'ரவி குமார்',
+            role: 'சொத்து உரிமையாளர்',
+            company: 'திருநெல்வேலி'
           },
           {
-            text: 'நாங்கள் பயன்படுத்திய சிறந்த ஆவண தளம். ஒத்துழைப்பு அம்சங்கள் ஒவ்வொரு வாரமும் மணிநேரங்களைச் சேமிக்கின்றன.',
-            author: 'மைக்கேல் செन்',
-            role: 'தொழில்நுட்ப தலைமை',
-            company: 'Innovation Labs'
-          },
-          {
-            text: 'சிறந்த ஆதரவு மற்றும் தொடர்ந்து மேம்படும் அம்சங்கள். மிகவும் பரிந்துரைக்கப்படுகிறது!',
-            author: 'எம்மா டேவிஸ்',
-            role: 'உள்ளடக்க இயக்குனர்',
-            company: 'Digital Solutions'
+            text: 'மிகவும் தொழில்முறை திருமண ஆவண உதவி. எங்களுக்கு என்ன தேவை என்பதை அவர்கள் சரியாகத் தெரிந்து கொண்டு வழிநடத்தினார்கள்.',
+            author: 'மீனா எஸ்.',
+            role: 'வாடிக்கையாளர்',
+            company: 'தென்காசி'
           }
         ]
       },
       faq: {
-        title: 'அடிக்கடி கேட்கப்படும் கேள்விகள்',
+        title: 'பொதுவான கேள்விகள்',
         items: [
           {
-            question: 'நான் எப்படி தொடங்குவது?',
-            answer: 'வெறுமனே இலவச பதிவு செய்யுங்கள், உங்கள் முதல் திட்டத்தை உருவாக்கவும், மற்றும் ஆவணங்களை தொடங்குங்கள். எங்கள் onboarding மந்திரவாதி உங்களை அமைப்பு செயல்முறையின் மூலம் வழிநடத்துவார்.'
+            question: 'நீங்கள் ஒரு அரசு அலுவலகமா?',
+            answer: 'இல்லை. நாங்கள் ஒரு தனியார் ஆலோசனை சேவை வழங்குகிறோம். ஆவணங்களைத் தயாரிப்பதில் உங்களுக்கு உதவுகிறோம், ஆனால் அதிகாரப்பூர்வ பதிவுகள் அரசு அலுவலகங்களில் மட்டுமே செய்யப்படும்.'
           },
           {
-            question: 'இருக்கும் ஆவணங்களை நான் நிறுவ முடியுமா?',
-            answer: 'ஆம்! நாங்கள் Markdown, HTML மற்றும் Word ஆவணங்கள் உட்பட பல்வேறு வடிவங்களிலிருந்து இறக்குமதி ஆதரவு செய்கிறோம்.'
-          },
-          {
-            question: 'இலவச திட்டம் உள்ளதா?',
-            answer: 'ஆம், நாங்கள் அடிப்படை அம்சங்களுடன் இலவச திட்டத்தை வழங்குகிறோம். பிரீமியம் அம்சங்கள் மற்றும் மேம்பட்ட திறன்களை அணுக எப்போது வேண்டுமானாலும் மேம்படுத்துங்கள்.'
-          },
-          {
-            question: 'தரவு பாதுகாப்பு பற்றி என்ன?',
-            answer: 'நாங்கள் நிறுவன-தர குறியாக்கம், வழக்கமான ব்যாக்கআப்கள் மற்றும் GDPR, CCPA மற்றும் பிற தரவு பாதுகாப்பு விதிமுறைகளுடன் இணங்கி செயல்படுகிறோம்.'
-          },
-          {
-            question: 'பில்லிங் எவ்வாறு கணக்கிடப்படுகிறது?',
-            answer: 'பில்லிங் ஒரு திட்டத்திற்கு ஒரு திட்டம் மற்றும் பயன்பாட்டு அடிப்படையில் உள்ளது. உங்கள் டேஷ்போர்டில் விரிவான பயன்பாட்டு மெட்ரிக்ஸைக் காணுங்கள்.'
-          },
-          {
-            question: 'நீங்கள் API அணுகல் வழங்குகிறீர்களா?',
-            answer: 'ஆம், எங்கள் REST API உங்கள் Rising Documentation ஐ உங்கள் இருக்கும் கருவிகள் மற்றும் பணிப்பாய்ங்களுடன் ஒருங்கிணைக்க அனுமதிக்கிறது.'
+            question: 'உங்களின் கட்டணம் எதை உள்ளடக்கியது?',
+            answer: 'எங்கள் கட்டணம் ஆலோசனை மற்றும் ஆவணத் தயாரிப்பு உதவிக்காக மட்டுமே. அரசு கட்டணங்கள் தனித்தனியாக அரசுத் துறைகளுக்கு நேரடியாக செலுத்தப்பட வேண்டும்.'
           }
         ]
       },
       contact: {
-        title: 'நாங்களை தொடர்பு கொள்ளுங்கள்',
-        subtitle: 'நாங்கள் உங்களிடமிருந்து கேட்க விரும்புகிறோம்',
-        form: { name: 'உங்கள் பெயர்', email: 'உங்கள் மின்னஞ்சல்', message: 'உங்கள் செய்தி', send: 'செய்தி அனுப்பவும்' },
+        title: 'எங்களை அணுகவும்',
+        subtitle: 'தொழில்முறை உதவிக்கு எங்களைத் தொடர்பு கொள்ளுங்கள்',
+        form: { name: 'உங்கள் பெயர்', email: 'உங்கள் மின்னஞ்சல்', message: 'நாங்கள் உங்களுக்கு எப்படி உதவ முடியும்?', send: 'தொடர்பு கொள்ள' },
         info: [
-          { icon: 'mail', label: 'மின்னஞ்சல்', value: 'hello@risingdocs.com' },
-          { icon: 'phone', label: 'தொலைபேசி', value: '+1 (555) 123-4567' },
-          { icon: 'location', label: 'முகவரி', value: 'San Francisco, CA 94105' }
+          { icon: 'mail', label: 'மின்னஞ்சல்', value: 'rrisingdocumentation@gmail.com' },
+          { icon: 'phone', label: 'தொலைபேசி', value: '95855 51021' },
+          { icon: 'location', label: 'அலுவலகம்', value: 'திருநெல்வேலி, தமிழ்நாடு' }
+        ]
+      },
+      legalSection: {
+        title: "⚖️ சட்ட எச்சரிக்கை",
+        points: [
+          "இது ஒரு தனியார் ஆலோசனை மையம், அரசு தளம் அல்ல.",
+          "நாங்கள் எந்த அரசுத் துறையையும் பிரதிநிதித்துவப்படுத்தவில்லை.",
+          "அரசு கட்டணங்கள் நேரடியாக அரசு அலுவலகங்களுக்கு செலுத்தப்பட வேண்டும்.",
+          "நாங்கள் ஆலோசனைகளை மட்டுமே வழங்குகிறோம்; அதிகாரப்பூர்வ ஆவணங்களை வழங்குவதில்லை.",
+          "அரசின் விதிமுறைகளுக்கு உட்பட்டு எங்கள் சேவைகள் வழங்கப்படும்."
         ]
       }
     }
@@ -262,76 +249,64 @@ export default function Home() {
   const getIcon = (iconName: string, className: string) => {
     const iconProps = { className };
     switch (iconName) {
-      case 'code':
-        return <Code {...iconProps} />;
-      case 'users':
-        return <Users {...iconProps} />;
-      case 'zap':
-        return <Zap {...iconProps} />;
-      case 'globe':
-        return <Globe {...iconProps} />;
-      case 'mail':
-        return <Mail {...iconProps} />;
-      case 'phone':
-        return <Phone {...iconProps} />;
-      case 'location':
-        return <MapPin {...iconProps} />;
-      default:
-        return null;
+      case 'file': return <FileText {...iconProps} />;
+      case 'users': return <Users {...iconProps} />;
+      case 'zap': return <Zap {...iconProps} />;
+      case 'globe': return <Globe {...iconProps} />;
+      case 'mail': return <Mail {...iconProps} />;
+      case 'phone': return <Phone {...iconProps} />;
+      case 'location': return <MapPin {...iconProps} />;
+      default: return null;
     }
   };
 
   return (
-    <div className="w-full bg-white overflow-hidden">
+    <div className="w-full bg-white overflow-hidden font-sans">
+      {/* Compliance Top Bar */}
+      <div className="bg-purple-900 text-white text-center py-2 px-4 text-xs sm:text-sm font-semibold sticky top-0 z-[60]">
+        {t.complianceBar}
+      </div>
+
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 shadow-lg">
+      <nav className="top-8 w-full bg-white/95 backdrop-blur-md z-50 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="text-2xl font-bold bg-gradient-to-r from-teal-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Rising
+            <div className="flex flex-col">
+              <div className="text-2xl font-bold text-purple-700">Rising</div>
+              <div className="text-[10px] text-gray-500 uppercase tracking-widest leading-none">{t.heroBadge}</div>
             </div>
-            
+
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8">
               {Object.entries(t.nav).map(([key, label]) => (
-                <a
-                  key={key}
-                  href={`#${key}`}
-                  className="text-gray-700 hover:text-transparent hover:bg-gradient-to-r hover:from-teal-600 hover:via-purple-600 hover:to-pink-600 hover:bg-clip-text transition-all"
-                >
+                <a key={key} href={`#${key}`} className="text-gray-700 hover:text-purple-600 font-medium transition-all">
                   {label}
                 </a>
               ))}
-            </div>
-
-            {/* Language Toggle & Mobile Menu */}
-            <div className="flex items-center space-x-4">
               <button
                 onClick={() => setLanguage(language === 'en' ? 'ta' : 'en')}
-                className="px-3 py-2 rounded-lg bg-gradient-to-r from-teal-500 to-purple-500 text-white text-sm font-semibold hover:shadow-lg transition-shadow"
+                className="px-3 py-1.5 rounded-full border-2 border-purple-600 text-purple-600 font-bold hover:bg-purple-600 hover:text-white transition-all text-xs"
               >
-                {language === 'en' ? 'தமிழ்' : 'EN'}
+                {language === 'en' ? 'தமிழ்' : 'English'}
               </button>
-              
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 text-gray-700"
-              >
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden flex items-center gap-4">
+              <button onClick={() => setLanguage(language === 'en' ? 'ta' : 'en')} className="text-xs font-bold text-purple-700 underline">
+                {language === 'en' ? 'தமிழ்' : 'English'}
+              </button>
+              <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 text-gray-700">
                 {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
             </div>
           </div>
 
-          {/* Mobile Menu */}
+          {/* Mobile Menu Dropdown */}
           {mobileMenuOpen && (
-            <div className="md:hidden pb-4 space-y-2 border-t border-gray-200">
+            <div className="md:hidden pb-4 space-y-2 border-t border-gray-100 animate-slide-down">
               {Object.entries(t.nav).map(([key, label]) => (
-                <a
-                  key={key}
-                  href={`#${key}`}
-                  className="block px-4 py-2 text-gray-700 hover:text-purple-600 transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
+                <a key={key} href={`#${key}`} className="block px-4 py-3 text-gray-700 hover:bg-purple-50" onClick={() => setMobileMenuOpen(false)}>
                   {label}
                 </a>
               ))}
@@ -341,44 +316,40 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-slate-50 via-cyan-50 to-purple-50">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-teal-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-          <div className="absolute top-40 right-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse animation-delay-2000"></div>
-          <div className="absolute -bottom-8 left-1/2 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse animation-delay-4000"></div>
-        </div>
+      <section id="home" className="pt-20 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-violet-50 to-white">
+        <div className="max-w-7xl mx-auto relative z-10 text-center">
+          <div className="inline-block px-4 py-1.5 rounded-full bg-purple-100 text-purple-700 text-sm font-bold mb-6 animate-bounce">
+            {t.heroBadge}
+          </div>
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-4 text-slate-900 leading-tight">
+            {t.hero.title}
+          </h1>
+          <p className="text-xl md:text-2xl font-bold text-purple-600 mb-6 italic">
+            {t.hero.subtitle}
+          </p>
+          <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+            {t.hero.description}
+          </p>
 
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-12 animate-fade-in">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-teal-600 via-purple-600 to-pink-600 bg-clip-text text-transparent leading-tight">
-              {t.hero.title}
-            </h1>
-            <p className="text-2xl md:text-3xl font-semibold text-gray-800 mb-6">
-              {t.hero.subtitle}
+          {/* Warning Box */}
+          <div className="max-w-xl mx-auto mb-10 p-4 bg-amber-50 border-l-4 border-amber-400 rounded-r-lg flex items-start gap-4 text-left">
+            <ShieldAlert className="text-amber-500 flex-shrink-0 mt-1" size={24} />
+            <p className="text-amber-800 text-sm font-semibold uppercase tracking-tight">
+              {t.hero.warning}
             </p>
-            <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-              {t.hero.description}
-            </p>
-            <button className="px-8 py-4 bg-gradient-to-r from-teal-500 via-purple-500 to-pink-500 text-white font-bold rounded-xl hover:shadow-2xl transition-all transform hover:scale-105 flex items-center gap-2 mx-auto">
-              {t.hero.cta}
-              <ChevronRight size={20} />
-            </button>
           </div>
 
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
+          <a href="#contact" className="inline-flex items-center gap-2 px-8 py-4 bg-purple-600 text-white font-bold rounded-xl hover:bg-purple-700 shadow-xl transition-all transform hover:scale-105 active:scale-95">
+            {t.hero.cta}
+            <ChevronRight size={20} />
+          </a>
+
+          {/* Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16">
             {t.hero.stats.map((stat, index) => (
-              <div
-                key={index}
-                className="p-6 bg-white/60 backdrop-blur-xl rounded-2xl border border-white/40 hover:border-purple-300 transition-all hover:shadow-xl transform hover:-translate-y-1"
-              >
-                <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-teal-600 to-purple-600 bg-clip-text text-transparent mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-sm md:text-base text-gray-600 font-semibold">
-                  {stat.label}
-                </div>
+              <div key={index} className="p-4 bg-white shadow-lg rounded-2xl border border-purple-50">
+                <div className="text-2xl font-bold text-purple-700">{stat.value}</div>
+                <div className="text-xs text-gray-500 font-medium uppercase">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -389,52 +360,32 @@ export default function Home() {
       <section id="services" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-teal-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              {t.services.title}
-            </h2>
-            <p className="text-xl text-gray-600">
-              {t.services.subtitle}
-            </p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-slate-900">{t.services.title}</h2>
+            <p className="text-gray-600 font-medium">{t.services.subtitle}</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 gap-8">
             {t.services.items.map((service, index) => (
-              <div
-                key={index}
-                className="group h-full rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100 border border-gray-200 p-8 hover:shadow-2xl transition-all transform hover:-translate-y-2 hover:border-purple-300 relative overflow-hidden"
-              >
-                {/* Gradient Overlay on Hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-teal-50 via-purple-50 to-pink-50 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                
-                <div className="relative z-10">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-teal-500 via-purple-500 to-pink-500 flex items-center justify-center mb-6 group-hover:shadow-lg transition-shadow">
-                    {getIcon(service.icon, 'text-white w-7 h-7')}
+              <div key={index} className="group p-8 bg-slate-50 rounded-2xl border border-slate-200 hover:border-purple-300 hover:shadow-2xl transition-all">
+                <div className="flex items-start gap-6">
+                  <div className="w-16 h-16 rounded-xl bg-purple-600 flex items-center justify-center text-white flex-shrink-0 group-hover:rotate-6 transition-transform">
+                    {getIcon(service.icon, 'w-8 h-8')}
                   </div>
-                  
-                  <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-purple-600 transition-colors">
-                    {service.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 text-sm mb-6">
-                    {service.description}
-                  </p>
-                  
-                  <div className="text-3xl font-bold bg-gradient-to-r from-teal-600 to-purple-600 bg-clip-text text-transparent mb-6">
-                    {service.price}
+                  <div className="flex-1">
+                    <span className="inline-block px-3 py-1 rounded-full bg-purple-100 text-purple-700 text-[10px] font-bold uppercase mb-2">
+                      {service.badge}
+                    </span>
+                    <h3 className="text-xl font-bold text-slate-900 mb-2">{service.title}</h3>
+                    <p className="text-gray-600 text-sm mb-4 leading-relaxed">{service.description}</p>
+                    <ul className="grid grid-cols-2 gap-2">
+                      {service.features.map((f, i) => (
+                        <li key={i} className="flex items-center gap-2 text-xs text-gray-700">
+                          <CheckCircle className="text-green-500 w-3 h-3" />
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  
-                  <ul className="space-y-3 mb-8">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-gray-700">
-                        <CheckCircle className="w-4 h-4 text-teal-500 mr-3 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  
-                  <button className="w-full py-3 rounded-xl bg-gradient-to-r from-teal-500 to-purple-500 text-white font-semibold hover:shadow-lg transition-all transform hover:scale-105">
-                    {language === 'en' ? 'Choose Plan' : 'திட்டத்தை தேர்ந்தெடுக்கவும்'}
-                  </button>
                 </div>
               </div>
             ))}
@@ -443,149 +394,64 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-cyan-50 to-purple-50">
+      <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Founder Photo Placeholder */}
-            <div className="relative">
-              <div className="relative w-full aspect-square rounded-2xl overflow-hidden shadow-2xl group">
-                <div className="absolute inset-0 bg-gradient-to-br from-teal-400 via-purple-400 to-pink-400 opacity-80"></div>
-                <div className="absolute inset-0 flex items-center justify-center text-white">
-                  <Users size={120} className="opacity-30" />
-                </div>
-                {/* Animated Border */}
-                <div className="absolute inset-0 border-4 border-transparent group-hover:border-white transition-all rounded-2xl bg-gradient-to-r from-teal-500 via-purple-500 to-pink-500 bg-clip-border opacity-0 group-hover:opacity-100"></div>
+            <div className="bg-purple-600 rounded-3xl p-12 text-white shadow-2xl relative overflow-hidden">
+              <FileText className="absolute bottom-[-20px] right-[-20px] w-64 h-64 opacity-10 rotate-12" />
+              <h2 className="text-3xl font-bold mb-6">{t.about.title}</h2>
+              <p className="text-lg leading-relaxed mb-8 opacity-90">{t.about.description}</p>
+              <div className="p-4 bg-white/10 rounded-xl border border-white/20">
+                <p className="text-sm font-medium italic mb-0">"{t.about.disclaimer}"</p>
               </div>
-              
-              {/* Decorative Elements */}
-              <div className="absolute -top-8 -right-8 w-32 h-32 bg-teal-300 rounded-full opacity-20 blur-2xl"></div>
-              <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-purple-300 rounded-full opacity-20 blur-2xl"></div>
             </div>
-
-            {/* About Content */}
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-teal-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                {t.about.title}
-              </h2>
-              
-              <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-                {t.about.description}
-              </p>
-
-              {/* Founder Card */}
-              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-shadow">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-teal-500 to-purple-500 flex items-center justify-center text-white font-bold text-xl">
-                    S
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-gray-800 text-lg">{t.about.founder}</h3>
-                    <p className="text-purple-600 font-semibold">{t.about.founderTitle}</p>
-                  </div>
+              <div className="flex items-center gap-6 mb-8 p-6 bg-white rounded-2xl shadow-lg border border-purple-50">
+                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white text-3xl font-bold">
+                  {t.about.founder.charAt(0)}
                 </div>
-                <p className="text-gray-600">
-                  {t.about.founderBio}
-                </p>
+                <div>
+                  <h3 className="text-2xl font-bold text-slate-900">{t.about.founder}</h3>
+                  <p className="text-purple-600 font-bold uppercase text-xs tracking-widest">{t.about.founderTitle}</p>
+                </div>
               </div>
+              <p className="text-gray-700 leading-relaxed text-lg italic border-l-4 border-purple-400 pl-6">
+                {t.about.founderBio}
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section id="testimonials" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-teal-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              {t.testimonials.title}
-            </h2>
-            <p className="text-xl text-gray-600">
-              {t.testimonials.subtitle}
-            </p>
-          </div>
-
-          {/* Testimonials Carousel */}
-          <div className="relative">
-            <div className="rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100 p-8 md:p-12 border border-gray-200 shadow-xl min-h-72 flex flex-col justify-between">
-              {/* Stars */}
-              <div className="flex gap-1 mb-6">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={20} className="fill-yellow-400 text-yellow-400" />
-                ))}
+      {/* Testimonials */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold mb-12">{t.testimonials.title}</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            {t.testimonials.items.map((item, i) => (
+              <div key={i} className="p-8 bg-slate-50 rounded-2xl relative">
+                <Star className="text-yellow-400 w-12 h-12 absolute top-[-24px] right-8 opacity-20" size={48} />
+                <p className="text-gray-700 italic mb-6 text-lg">"{item.text}"</p>
+                <div className="font-bold text-purple-700">{item.author}</div>
+                <div className="text-xs text-gray-500 uppercase tracking-tighter">{item.role}, {item.company}</div>
               </div>
-
-              {/* Testimonial Text */}
-              <p className="text-xl md:text-2xl text-gray-800 font-semibold mb-8 italic leading-relaxed">
-                "{t.testimonials.items[activeTestimonial].text}"
-              </p>
-
-              {/* Author Info */}
-              <div>
-                <div className="font-bold text-gray-900 text-lg">
-                  {t.testimonials.items[activeTestimonial].author}
-                </div>
-                <div className="text-purple-600 font-semibold">
-                  {t.testimonials.items[activeTestimonial].role}
-                </div>
-                <div className="text-gray-600 text-sm">
-                  {t.testimonials.items[activeTestimonial].company}
-                </div>
-              </div>
-            </div>
-
-            {/* Carousel Dots */}
-            <div className="flex justify-center gap-3 mt-8">
-              {t.testimonials.items.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setActiveTestimonial(index)}
-                  className={`w-3 h-3 rounded-full transition-all ${
-                    index === activeTestimonial
-                      ? 'bg-gradient-to-r from-teal-600 to-purple-600 w-8'
-                      : 'bg-gray-300 hover:bg-gray-400'
-                  }`}
-                />
-              ))}
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section id="faq" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-50 via-cyan-50 to-purple-50">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-teal-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              {t.faq.title}
-            </h2>
+      {/* Legal Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-amber-50">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="inline-block p-3 bg-amber-400 text-white rounded-full mb-6">
+            <ShieldAlert size={32} />
           </div>
-
-          <div className="space-y-4">
-            {t.faq.items.map((item, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-purple-300 transition-all hover:shadow-lg"
-              >
-                <button
-                  onClick={() => setActiveFaq(activeFaq === index ? null : index)}
-                  className="w-full px-8 py-6 flex justify-between items-center hover:bg-gradient-to-r hover:from-teal-50 hover:to-purple-50 transition-colors text-left"
-                >
-                  <span className="font-bold text-gray-900 text-lg pr-4">
-                    {item.question}
-                  </span>
-                  <ChevronDown
-                    size={24}
-                    className={`flex-shrink-0 text-purple-600 transition-transform ${
-                      activeFaq === index ? 'rotate-180' : ''
-                    }`}
-                  />
-                </button>
-
-                {activeFaq === index && (
-                  <div className="px-8 py-6 border-t border-gray-100 bg-gradient-to-br from-slate-50 to-slate-100 text-gray-700 leading-relaxed animate-fade-in">
-                    {item.answer}
-                  </div>
-                )}
+          <h2 className="text-3xl font-bold mb-10 text-amber-900">{t.legalSection.title}</h2>
+          <div className="grid gap-4 text-left">
+            {t.legalSection.points.map((point, i) => (
+              <div key={i} className="flex gap-4 p-4 bg-white rounded-xl shadow-sm border border-amber-200">
+                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-amber-500 text-white flex items-center justify-center text-xs font-bold">{i + 1}</span>
+                <p className="text-amber-900 font-semibold">{point}</p>
               </div>
             ))}
           </div>
@@ -595,151 +461,81 @@ export default function Home() {
       {/* Contact Section */}
       <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-teal-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              {t.contact.title}
-            </h2>
-            <p className="text-xl text-gray-600">
-              {t.contact.subtitle}
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {/* Contact Info */}
-            {t.contact.info.map((info, index) => (
-              <div
-                key={index}
-                className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl p-8 border border-gray-200 hover:shadow-lg transition-all hover:border-purple-300"
-              >
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-teal-500 to-purple-500 flex items-center justify-center mb-6">
-                  {getIcon(info.icon, 'text-white w-7 h-7')}
-                </div>
-                <h3 className="font-bold text-gray-900 mb-2">{info.label}</h3>
-                <p className="text-gray-700">{info.value}</p>
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <h2 className="text-4xl font-bold mb-6 text-slate-900">{t.contact.title}</h2>
+              <p className="text-gray-600 mb-10">{t.contact.subtitle}</p>
+              <div className="space-y-6">
+                {t.contact.info.map((info, idx) => (
+                  <div key={idx} className="flex items-center gap-4 group">
+                    <div className="w-12 h-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center group-hover:bg-purple-600 group-hover:text-white transition-all">
+                      {getIcon(info.icon, 'w-6 h-6')}
+                    </div>
+                    <div>
+                      <div className="text-xs text-gray-500 uppercase font-bold">{info.label}</div>
+                      <div className="text-slate-900 font-bold text-lg">{info.value}</div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-
-          {/* Contact Form */}
-          <div className="max-w-2xl mx-auto bg-gradient-to-br from-slate-50 via-cyan-50 to-purple-50 rounded-2xl p-8 md:p-12 border border-gray-200">
-            <form className="space-y-6">
-              <div>
-                <input
-                  type="text"
-                  placeholder={t.contact.form.name}
-                  className="w-full px-6 py-4 rounded-xl border border-gray-300 bg-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all"
-                />
+              <div className="mt-12 p-6 bg-slate-900 text-white rounded-2xl relative overflow-hidden">
+                <Award className="absolute top-[-10px] right-[-10px] w-24 h-24 opacity-10" />
+                <h4 className="font-bold mb-2">Registered Entity</h4>
+                <p className="text-sm opacity-80">Proudly serving the Tirunelveli community with transparent and professional documentation consultancy.</p>
               </div>
-              <div>
-                <input
-                  type="email"
-                  placeholder={t.contact.form.email}
-                  className="w-full px-6 py-4 rounded-xl border border-gray-300 bg-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all"
-                />
+            </div>
+            <div className="bg-slate-50 p-8 rounded-3xl border border-slate-200 shadow-xl">
+              <form className="space-y-4">
+                <input type="text" placeholder={t.contact.form.name} className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-purple-600 outline-none" />
+                <input type="email" placeholder={t.contact.form.email} className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-purple-600 outline-none" />
+                <textarea placeholder={t.contact.form.message} rows={5} className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-purple-600 outline-none resize-none"></textarea>
+                <button className="w-full py-4 bg-purple-600 text-white font-bold rounded-xl hover:bg-purple-700 shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2">
+                  <Send size={18} />
+                  {t.contact.form.send}
+                </button>
+              </form>
+              <div className="mt-6 text-center">
+                <p className="text-[10px] text-gray-500 uppercase font-bold tracking-widest leading-tight">
+                  By submitting, you agree to receive a professional consultation call.
+                </p>
               </div>
-              <div>
-                <textarea
-                  placeholder={t.contact.form.message}
-                  rows={6}
-                  className="w-full px-6 py-4 rounded-xl border border-gray-300 bg-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all resize-none"
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                className="w-full py-4 bg-gradient-to-r from-teal-500 via-purple-500 to-pink-500 text-white font-bold rounded-xl hover:shadow-2xl transition-all transform hover:scale-105 flex items-center justify-center gap-2"
-              >
-                <Send size={20} />
-                {t.contact.form.send}
-              </button>
-            </form>
-          </div>
-
-          {/* Map Placeholder */}
-          <div className="mt-16 rounded-2xl overflow-hidden shadow-xl h-96 bg-gradient-to-br from-teal-400 via-purple-400 to-pink-400 flex items-center justify-center">
-            <div className="text-white text-center">
-              <MapPin size={64} className="mx-auto mb-4 opacity-50" />
-              <p className="text-2xl font-bold">San Francisco, CA</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-white py-12 px-4 sm:px-6 lg:px-8">
+      <footer className="bg-slate-950 text-white py-12 px-4 shadow-inner">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <div className="text-2xl font-bold bg-gradient-to-r from-teal-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">
-                Rising
-              </div>
-              <p className="text-gray-400">
-                {language === 'en' ? 'Transform your knowledge into excellence.' : 'உங்கள் அறிவை சிறப்புக்கு மாற்றுங்கள்.'}
-              </p>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-12">
+            <div className="text-center md:text-left">
+              <div className="text-2xl font-bold mb-1">Rising Documentation</div>
+              <div className="text-purple-500 text-xs font-bold uppercase tracking-widest">{t.heroBadge}</div>
             </div>
-            <div>
-              <h4 className="font-bold mb-4">{language === 'en' ? 'Product' : 'தயாரிப்பு'}</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#services" className="hover:text-white transition">{t.nav.services}</a></li>
-                <li><a href="#faq" className="hover:text-white transition">{t.nav.faq}</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4">{language === 'en' ? 'Company' : 'நிறுவனம்'}</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#about" className="hover:text-white transition">{t.nav.about}</a></li>
-                <li><a href="#contact" className="hover:text-white transition">{t.nav.contact}</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4">{language === 'en' ? 'Legal' : 'சட்ட'}</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition">{language === 'en' ? 'Privacy' : 'தனியுரிமை'}</a></li>
-                <li><a href="#" className="hover:text-white transition">{language === 'en' ? 'Terms' : 'நிபந்தனைகள்'}</a></li>
-              </ul>
+            <div className="flex gap-6 text-gray-400 text-xs font-bold uppercase">
+              <a href="#services" className="hover:text-white">{t.nav.services}</a>
+              <a href="#about" className="hover:text-white">{t.nav.about}</a>
+              <a href="#contact" className="hover:text-white">{t.nav.contact}</a>
             </div>
           </div>
-          
-          <div className="border-t border-slate-700 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">
-              © 2025 Rising Documentation. {language === 'en' ? 'All rights reserved.' : 'அனைத்து உரிமைகளும் உரிமைப்பட்டவை.'}
-            </p>
-            <div className="flex gap-6 mt-4 md:mt-0">
-              <a href="#" className="text-gray-400 hover:text-white transition">Twitter</a>
-              <a href="#" className="text-gray-400 hover:text-white transition">LinkedIn</a>
-              <a href="#" className="text-gray-400 hover:text-white transition">GitHub</a>
+          <div className="border-t border-slate-800 pt-8 text-center">
+            <div className="inline-block px-4 py-1.5 bg-amber-500/10 border border-amber-500/20 text-amber-500 rounded-full text-[10px] font-bold uppercase mb-4">
+              ⚠️ Not affiliated with any government department
             </div>
+            <p className="text-gray-500 text-xs">
+              © 2025 Rising Documentation. All rights reserved. S. Jameela, Tirunelveli.
+            </p>
           </div>
         </div>
       </footer>
 
-      {/* Smooth Scroll Style */}
       <style jsx global>{`
-        html {
-          scroll-behavior: smooth;
+        @keyframes slide-down {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
         }
-
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fade-in {
-          animation: fade-in 0.8s ease-out;
-        }
-
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-
-        .animation-delay-4000 {
-          animation-delay: 4s;
-        }
+        .animate-slide-down { animation: slide-down 0.3s ease-out; }
+        html { scroll-behavior: smooth; }
       `}</style>
     </div>
   );
