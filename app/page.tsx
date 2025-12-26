@@ -4,42 +4,55 @@ import React, { useState, useEffect } from 'react';
 import { ChevronDown, Menu, X, Star, Users, Zap, FileText, CheckCircle, Send, MapPin, Phone, Mail, ChevronRight, Globe, ShieldAlert, Award, MessageCircle } from 'lucide-react';
 
 const Logo = ({ className = "w-10 h-10" }: { className?: string }) => (
-  <svg viewBox="0 0 100 100" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-    {/* Sun */}
-    <circle cx="70" cy="30" r="15" fill="url(#sun-grad)" />
-    {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => (
-      <line
-        key={angle}
-        x1={70 + Math.cos(angle * Math.PI / 180) * 18}
-        y1={30 + Math.sin(angle * Math.PI / 180) * 18}
-        x2={70 + Math.cos(angle * Math.PI / 180) * 25}
-        y2={30 + Math.sin(angle * Math.PI / 180) * 25}
-        stroke="#F59E0B"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-    ))}
-    {/* Documents */}
-    <rect x="15" y="40" width="20" height="40" rx="2" fill="#334155" />
-    <rect x="25" y="30" width="20" height="50" rx="2" fill="#475569" />
-    {/* Arrow */}
-    <path
-      d="M10 85 C 30 80, 50 60, 65 30 L 55 30 L 68 20 L 78 35 L 68 35"
-      stroke="url(#arrow-grad)"
-      strokeWidth="6"
-      strokeLinecap="round"
-      fill="none"
-    />
+  <svg viewBox="0 0 400 300" className={className} xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <linearGradient id="sun-grad" x1="70" y1="15" x2="70" y2="45" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#FBBF24" />
-        <stop offset="1" stopColor="#F59E0B" />
+      <linearGradient id="sunGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style={{ stopColor: '#FFD700', stopOpacity: 1 }} />
+        <stop offset="100%" style={{ stopColor: '#FF8C00', stopOpacity: 1 }} />
       </linearGradient>
-      <linearGradient id="arrow-grad" x1="10" y1="85" x2="70" y2="20" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#10B981" />
-        <stop offset="1" stopColor="#3B82F6" />
+      <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style={{ stopColor: '#FF4500', stopOpacity: 1 }} />
+        <stop offset="100%" style={{ stopColor: '#FFA500', stopOpacity: 1 }} />
+      </linearGradient>
+      <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style={{ stopColor: '#00BFFF', stopOpacity: 1 }} />
+        <stop offset="100%" style={{ stopColor: '#1E90FF', stopOpacity: 1 }} />
       </linearGradient>
     </defs>
+
+    {/* Sun with Rays */}
+    <g transform="translate(250, 150)">
+      <circle r="60" fill="url(#sunGrad)" />
+      {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(deg => (
+        <path
+          key={deg}
+          d="M 70,0 L 100,0"
+          stroke="#FF8C00"
+          strokeWidth="8"
+          strokeLinecap="round"
+          transform={`rotate(${deg})`}
+        />
+      ))}
+    </g>
+
+    {/* Documents */}
+    <rect x="80" y="80" width="70" height="120" fill="#E2E8F0" rx="4" />
+    <rect x="100" y="60" width="80" height="140" fill="#F8FAFC" rx="4" stroke="#CBD5E1" strokeWidth="2" />
+    <rect x="120" y="40" width="90" height="160" fill="#FFFFFF" rx="4" stroke="#CBD5E1" strokeWidth="2" />
+
+    {/* Blue Wave/Base */}
+    <path
+      d="M 50,220 Q 200,180 350,240 L 350,260 Q 200,200 50,240 Z"
+      fill="url(#waveGrad)"
+    />
+
+    {/* Rising Arrow */}
+    <path
+      d="M 60,230 C 120,220 180,180 230,80 L 210,90 L 245,40 L 265,95 L 245,90 C 200,180 140,230 60,240 Z"
+      fill="url(#arrowGrad)"
+      stroke="#B45309"
+      strokeWidth="1"
+    />
   </svg>
 );
 
@@ -158,14 +171,15 @@ export default function Home() {
         subtitle: 'Reach out for professional assistance',
         form: { name: 'Your Name', email: 'Your Email', message: 'How can we help you?', send: 'Send Inquiry' },
         info: [
-          { icon: 'mail', label: 'Email', value: 'rrisingdocumentation@gmail.com' },
-          { icon: 'phone', label: 'Primary Phone', value: '+91 95855 51021' },
-          { icon: 'phone', label: 'Alternative Contact', value: '+91 462 358 7069' },
-          { icon: 'whatsapp', label: 'WhatsApp Support', value: '+91 95855 51021' },
+          { icon: 'mail', label: 'Email', value: 'rrisingdocumentation@gmail.com', href: 'mailto:rrisingdocumentation@gmail.com' },
+          { icon: 'phone', label: 'Primary Phone', value: '+91 95855 51021', href: 'tel:+919585551021' },
+          { icon: 'phone', label: 'Alternative Contact', value: '+91 462 358 7069', href: 'tel:+914623587069' },
+          { icon: 'whatsapp', label: 'WhatsApp Support', value: '+91 95855 51021', href: 'https://wa.me/919585551021' },
           {
-            icon: 'globe',
-            label: 'Bilingual Support',
-            value: 'Bilingual support in Tamil and English via direct calls and WhatsApp.'
+            icon: 'location',
+            label: 'Office Location',
+            value: 'Tirunelveli, Tamil Nadu',
+            href: 'https://www.google.com/maps/search/?api=1&query=Rising+Documentation+Tirunelveli'
           }
         ]
       },
@@ -275,14 +289,15 @@ export default function Home() {
         subtitle: 'தொழில்முறை உதவிக்கு எங்களைத் தொடர்பு கொள்ளுங்கள்',
         form: { name: 'உங்கள் பெயர்', email: 'உங்கள் மின்னஞ்சல்', message: 'நாங்கள் உங்களுக்கு எப்படி உதவ முடியும்?', send: 'தொடர்பு கொள்ள' },
         info: [
-          { icon: 'mail', label: 'மின்னஞ்சல்', value: 'rrisingdocumentation@gmail.com' },
-          { icon: 'phone', label: 'முதன்மை எண்', value: '+91 95855 51021' },
-          { icon: 'phone', label: 'மாற்று எண்', value: '+91 462 358 7069' },
-          { icon: 'whatsapp', label: 'WhatsApp உதவி', value: '+91 95855 51021' },
+          { icon: 'mail', label: 'மின்னஞ்சல்', value: 'rrisingdocumentation@gmail.com', href: 'mailto:rrisingdocumentation@gmail.com' },
+          { icon: 'phone', label: 'முதன்மை எண்', value: '+91 95855 51021', href: 'tel:+919585551021' },
+          { icon: 'phone', label: 'மாற்று எண்', value: '+91 462 358 7069', href: 'tel:+914623587069' },
+          { icon: 'whatsapp', label: 'WhatsApp உதவி', value: '+91 95855 51021', href: 'https://wa.me/919585551021' },
           {
-            icon: 'globe',
-            label: 'இருமொழி ஆதரவு',
-            value: 'நேரடி அழைப்புகள் மற்றும் WhatsApp மூலம் தமிழ் மற்றும் ஆங்கிலத்தில் இருமொழி ஆதரவு.'
+            icon: 'location',
+            label: 'அலுவலக இடம்',
+            value: 'திருநெல்வேலி, தமிழ்நாடு',
+            href: 'https://www.google.com/maps/search/?api=1&query=Rising+Documentation+Tirunelveli'
           }
         ]
       },
@@ -328,7 +343,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center gap-3">
-              <Logo className="w-12 h-12" />
+              <Logo className="w-16 h-16" />
               <div className="flex flex-col">
                 <div className="text-xl md:text-2xl font-bold text-slate-900 leading-tight">Rising <span className="text-purple-600">Documentation</span></div>
                 <div className="text-[10px] text-purple-500 font-bold uppercase tracking-widest leading-none">Registration Solutions</div>
@@ -378,7 +393,7 @@ export default function Home() {
       <section id="home" className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-slate-50 to-white">
         <div className="max-w-7xl mx-auto relative z-10 text-center">
           <div className="flex justify-center mb-8">
-            <Logo className="w-24 h-24 drop-shadow-2xl" />
+            <Logo className="w-32 h-32 md:w-48 md:h-48 drop-shadow-2xl" />
           </div>
           <div className="inline-block px-4 py-1.5 rounded-full bg-purple-100 text-purple-700 text-sm font-bold mb-6">
             {t.heroBadge}
@@ -406,9 +421,9 @@ export default function Home() {
               {t.hero.cta}
               <ChevronRight size={20} />
             </a>
-            <a href="tel:+919585551021" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-emerald-600 text-white font-bold rounded-2xl hover:bg-emerald-700 shadow-xl transition-all transform hover:scale-105 active:scale-95">
-              <Phone size={20} />
-              Call Now
+            <a href="https://wa.me/919585551021" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-emerald-600 text-white font-bold rounded-2xl hover:bg-emerald-700 shadow-xl transition-all transform hover:scale-105 active:scale-95">
+              <MessageCircle size={20} />
+              WhatsApp Now
             </a>
           </div>
 
@@ -531,7 +546,14 @@ export default function Home() {
                     </div>
                     <div>
                       <div className="text-xs text-purple-600 uppercase font-black tracking-widest mb-1">{info.label}</div>
-                      <div className="text-slate-900 font-black text-xl md:text-2xl leading-tight">{info.value}</div>
+                      <a
+                        href={info.href}
+                        target={info.href?.startsWith('http') ? "_blank" : "_self"}
+                        rel="noopener noreferrer"
+                        className="text-slate-900 font-black text-xl md:text-2xl leading-tight hover:text-emerald-600 transition-colors"
+                      >
+                        {info.value}
+                      </a>
                     </div>
                   </div>
                 ))}
@@ -570,16 +592,16 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row justify-between items-center gap-12 mb-16 border-b border-slate-800 pb-16">
             <div className="text-center lg:text-left flex items-center gap-4">
-              <Logo className="w-16 h-16" />
+              <Logo className="w-20 h-20" />
               <div>
-                <div className="text-2xl font-black mb-1 leading-none">{businessName}</div>
+                <div className="text-2xl font-black mb-1 leading-none">Rising <span className="text-purple-500">Documentation</span></div>
                 <div className="text-emerald-500 text-[10px] font-black uppercase tracking-[0.3em]">{t.heroBadge}</div>
               </div>
             </div>
             <div className="flex flex-wrap justify-center gap-8 text-xs font-black uppercase tracking-widest">
-              <a href="#services" className="hover:text-emerald-400 transition-colors">{t.nav.services}</a>
-              <a href="#about" className="hover:text-emerald-400 transition-colors">{t.nav.about}</a>
-              <a href="#contact" className="hover:text-emerald-400 transition-colors">{t.nav.contact}</a>
+              <a href="#services" className="hover:text-emerald-400 transition-colors uppercase tracking-widest">{t.nav.services}</a>
+              <a href="#about" className="hover:text-emerald-400 transition-colors uppercase tracking-widest">{t.nav.about}</a>
+              <a href="#contact" className="hover:text-emerald-400 transition-colors uppercase tracking-widest">{t.nav.contact}</a>
             </div>
           </div>
           <div className="text-center">
