@@ -3,56 +3,70 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, Menu, X, Star, Users, Zap, FileText, CheckCircle, Send, MapPin, Phone, Mail, ChevronRight, Globe, ShieldAlert, Award, MessageCircle } from 'lucide-react';
 
-const Logo = ({ className = "w-10 h-10" }: { className?: string }) => (
-  <svg viewBox="0 0 400 300" className={className} xmlns="http://www.w3.org/2000/svg">
+const Logo = ({ className = "w-10 h-10", dark = false }: { className?: string, dark?: boolean }) => (
+  <svg viewBox="0 0 320 280" className={className} xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <linearGradient id="sunGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" style={{ stopColor: '#FFD700', stopOpacity: 1 }} />
-        <stop offset="100%" style={{ stopColor: '#FF8C00', stopOpacity: 1 }} />
+      {/* Light Version Gradients */}
+      <linearGradient id="arrowGradLight" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%" style={{ stopColor: '#00A859', stopOpacity: 1 }} />
+        <stop offset="100%" style={{ stopColor: '#8DC63F', stopOpacity: 1 }} />
       </linearGradient>
-      <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" style={{ stopColor: '#FF4500', stopOpacity: 1 }} />
-        <stop offset="100%" style={{ stopColor: '#FFA500', stopOpacity: 1 }} />
+
+      {/* Dark Version Gradients */}
+      <linearGradient id="arrowGradDark" x1="0%" y1="100%" x2="100%" y2="px">
+        <stop offset="0%" style={{ stopColor: '#F7941E', stopOpacity: 1 }} />
+        <stop offset="100%" style={{ stopColor: '#FFF200', stopOpacity: 1 }} />
       </linearGradient>
+
+      <linearGradient id="sunGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" style={{ stopColor: '#FBB03B', stopOpacity: 1 }} />
+        <stop offset="100%" style={{ stopColor: '#D4145A', stopOpacity: 0.8 }} />
+      </linearGradient>
+
       <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" style={{ stopColor: '#00BFFF', stopOpacity: 1 }} />
-        <stop offset="100%" style={{ stopColor: '#1E90FF', stopOpacity: 1 }} />
+        <stop offset="0%" style={{ stopColor: '#00A99D', stopOpacity: 1 }} />
+        <stop offset="100%" style={{ stopColor: '#3BBEC3', stopOpacity: 1 }} />
       </linearGradient>
     </defs>
 
-    {/* Sun with Rays */}
-    <g transform="translate(250, 150)">
-      <circle r="60" fill="url(#sunGrad)" />
-      {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(deg => (
-        <path
-          key={deg}
-          d="M 70,0 L 100,0"
-          stroke="#FF8C00"
-          strokeWidth="8"
-          strokeLinecap="round"
-          transform={`rotate(${deg})`}
-        />
-      ))}
+    <g transform="translate(10, 10)">
+      {/* Documents */}
+      <rect x="50" y="80" width="15" height="100" fill={dark ? "#FFFFFF" : "#1B1464"} rx="2" />
+      <rect x="75" y="60" width="23" height="120" fill={dark ? "#E6E6E6" : "#2E3192"} rx="2" />
+      <rect x="110" y="30" width="60" height="150" fill={dark ? "#CCCCCC" : "#393185"} rx="4" />
+
+      {/* Sun */}
+      <g transform="translate(230, 110)">
+        <circle r="45" fill="url(#sunGrad)" />
+        {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(deg => {
+          if (deg > 270 || deg < 110) return null; // Only show outer rays
+          return (
+            <path
+              key={deg}
+              d="M 52,0 L 75,0"
+              stroke="#F7941E"
+              strokeWidth="5"
+              strokeLinecap="round"
+              transform={`rotate(${deg})`}
+            />
+          );
+        })}
+      </g>
+
+      {/* Main Base Wave */}
+      <path
+        d="M 10,210 Q 160,180 310,210 L 310,225 Q 160,195 10,225 Z"
+        fill="url(#waveGrad)"
+      />
+
+      {/* Rising Arrow */}
+      <path
+        d="M 20,205 C 80,200 160,160 215,60 L 195,75 L 235,20 L 255,85 L 235,75 C 190,165 110,215 20,220 Z"
+        fill={dark ? "url(#arrowGradDark)" : "url(#arrowGradLight)"}
+      />
     </g>
 
-    {/* Documents */}
-    <rect x="80" y="80" width="70" height="120" fill="#E2E8F0" rx="4" />
-    <rect x="100" y="60" width="80" height="140" fill="#F8FAFC" rx="4" stroke="#CBD5E1" strokeWidth="2" />
-    <rect x="120" y="40" width="90" height="160" fill="#FFFFFF" rx="4" stroke="#CBD5E1" strokeWidth="2" />
-
-    {/* Blue Wave/Base */}
-    <path
-      d="M 50,220 Q 200,180 350,240 L 350,260 Q 200,200 50,240 Z"
-      fill="url(#waveGrad)"
-    />
-
-    {/* Rising Arrow */}
-    <path
-      d="M 60,230 C 120,220 180,180 230,80 L 210,90 L 245,40 L 265,95 L 245,90 C 200,180 140,230 60,240 Z"
-      fill="url(#arrowGrad)"
-      stroke="#B45309"
-      strokeWidth="1"
-    />
+    {/* Text Section (For use in certain contexts if needed, but we mostly use HTML components for branding) */}
   </svg>
 );
 
@@ -159,10 +173,6 @@ export default function Home() {
           {
             question: 'What do your fees cover?',
             answer: 'Our fees are for our professional time and expertise in assisting you with document preparation and guidance. Government fees are separate and paid directly to government departments.'
-          },
-          {
-            question: 'How do you help with property documents?',
-            answer: 'We help verify your existing documents, assist in drafting new deeds, and explain the step-by-step procedure required at the Registrar office.'
           }
         ]
       },
@@ -178,8 +188,8 @@ export default function Home() {
           {
             icon: 'location',
             label: 'Office Location',
-            value: 'Tirunelveli, Tamil Nadu',
-            href: 'https://www.google.com/maps/search/?api=1&query=Rising+Documentation+Tirunelveli'
+            value: 'No. 3/1, Near Collectorate, Tirunelveli, Tamil Nadu 627009',
+            href: 'https://www.google.com/maps/search/?api=1&query=Rising+Documentation+Tirunelveli+Registration+Solutions'
           }
         ]
       },
@@ -296,8 +306,8 @@ export default function Home() {
           {
             icon: 'location',
             label: 'அலுவலக இடம்',
-            value: 'திருநெல்வேலி, தமிழ்நாடு',
-            href: 'https://www.google.com/maps/search/?api=1&query=Rising+Documentation+Tirunelveli'
+            value: 'வ.எண். 3/1, ஆட்சியர் அலுவலகம் அருகில், திருநெல்வேலி, தமிழ்நாடு 627009',
+            href: 'https://www.google.com/maps/search/?api=1&query=Rising+Documentation+Tirunelveli+Registration+Solutions'
           }
         ]
       },
@@ -334,32 +344,33 @@ export default function Home() {
   return (
     <div className="w-full bg-white overflow-hidden font-sans">
       {/* Compliance Top Bar */}
-      <div className="bg-slate-900 text-white text-center py-2 px-4 text-xs sm:text-sm font-semibold sticky top-0 z-[60]">
+      <div className="bg-[#1B1464] text-white text-center py-2 px-4 text-xs sm:text-sm font-semibold sticky top-0 z-[60]">
         {t.complianceBar}
       </div>
 
       {/* Navigation */}
       <nav className="top-8 w-full bg-white/95 backdrop-blur-md z-50 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
+          <div className="flex justify-between items-center h-24">
             <div className="flex items-center gap-3">
-              <Logo className="w-16 h-16" />
+              <Logo className="w-20 h-20" />
               <div className="flex flex-col">
-                <div className="text-xl md:text-2xl font-bold text-slate-900 leading-tight">Rising <span className="text-purple-600">Documentation</span></div>
-                <div className="text-[10px] text-purple-500 font-bold uppercase tracking-widest leading-none">Registration Solutions</div>
+                <div className="text-xl md:text-2xl font-black text-[#1B1464] leading-none tracking-tighter uppercase">RISING</div>
+                <div className="text-sm md:text-lg font-black text-[#1B1464] leading-none tracking-tighter uppercase">DOCUMENTATION</div>
+                <div className="text-[10px] text-[#00A99D] font-bold uppercase tracking-[0.2em] mt-1 border-t border-[#00A99D] pt-0.5">Registration Solutions</div>
               </div>
             </div>
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8">
               {Object.entries(t.nav).map(([key, label]) => (
-                <a key={key} href={`#${key}`} className="text-gray-700 hover:text-purple-600 font-semibold transition-all">
+                <a key={key} href={`#${key}`} className="text-gray-700 hover:text-[#00A99D] font-black uppercase text-xs tracking-widest transition-all">
                   {label}
                 </a>
               ))}
               <button
                 onClick={() => setLanguage(language === 'en' ? 'ta' : 'en')}
-                className="px-4 py-2 rounded-xl bg-purple-600 text-white font-bold hover:bg-purple-700 transition-all text-xs"
+                className="px-5 py-2.5 rounded-full bg-[#1B1464] text-white font-black hover:bg-[#00A99D] transition-all text-xs tracking-widest"
               >
                 {language === 'en' ? 'தமிழ்' : 'English'}
               </button>
@@ -367,7 +378,7 @@ export default function Home() {
 
             {/* Mobile Menu Button */}
             <div className="md:hidden flex items-center gap-4">
-              <button onClick={() => setLanguage(language === 'en' ? 'ta' : 'en')} className="text-xs font-bold text-purple-700 underline">
+              <button onClick={() => setLanguage(language === 'en' ? 'ta' : 'en')} className="text-xs font-black text-[#1B1464] underline uppercase tracking-tighter">
                 {language === 'en' ? 'தமிழ்' : 'English'}
               </button>
               <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="p-2 text-gray-700">
@@ -380,7 +391,7 @@ export default function Home() {
           {mobileMenuOpen && (
             <div className="md:hidden pb-4 space-y-2 border-t border-gray-100 animate-slide-down">
               {Object.entries(t.nav).map(([key, label]) => (
-                <a key={key} href={`#${key}`} className="block px-4 py-3 text-gray-700 hover:bg-purple-50 font-medium" onClick={() => setMobileMenuOpen(false)}>
+                <a key={key} href={`#${key}`} className="block px-4 py-4 text-gray-700 hover:bg-slate-50 font-black uppercase text-xs tracking-widest" onClick={() => setMobileMenuOpen(false)}>
                   {label}
                 </a>
               ))}
@@ -390,49 +401,51 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-slate-50 to-white">
+      <section id="home" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-slate-50 to-white">
         <div className="max-w-7xl mx-auto relative z-10 text-center">
-          <div className="flex justify-center mb-8">
-            <Logo className="w-32 h-32 md:w-48 md:h-48 drop-shadow-2xl" />
+          <div className="flex justify-center mb-10">
+            <Logo className="w-40 h-40 md:w-64 md:h-64 drop-shadow-2xl" />
           </div>
-          <div className="inline-block px-4 py-1.5 rounded-full bg-purple-100 text-purple-700 text-sm font-bold mb-6">
+          <div className="inline-block px-5 py-2 rounded-full bg-[#E6F4F3] text-[#00A99D] text-xs font-black uppercase tracking-[0.2em] mb-8">
             {t.heroBadge}
           </div>
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 text-slate-900 leading-tight">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 text-[#1B1464] leading-none tracking-tighter">
             {t.hero.title}
           </h1>
-          <p className="text-xl md:text-2xl font-bold text-emerald-600 mb-6 italic underline decoration-emerald-200">
+          <p className="text-xl md:text-3xl font-black text-[#00A859] mb-8 italic uppercase tracking-widest">
             {t.hero.subtitle}
           </p>
-          <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto font-medium">
+          <p className="text-xl text-slate-600 mb-12 max-w-3xl mx-auto font-medium leading-relaxed">
             {t.hero.description}
           </p>
 
           {/* Warning Box */}
-          <div className="max-w-xl mx-auto mb-10 p-5 bg-amber-50 border-l-8 border-amber-400 rounded-r-2xl flex items-start gap-4 text-left shadow-sm">
-            <ShieldAlert className="text-amber-500 flex-shrink-0 mt-1" size={28} />
-            <p className="text-amber-900 text-sm font-bold uppercase tracking-tight">
+          <div className="max-w-2xl mx-auto mb-12 p-6 bg-amber-50 border-l-[10px] border-amber-400 rounded-r-3xl flex items-center gap-6 text-left shadow-lg">
+            <div className="bg-amber-400 p-3 rounded-full text-white">
+              <ShieldAlert size={32} />
+            </div>
+            <p className="text-amber-900 text-sm md:text-base font-black uppercase tracking-tight leading-snug">
               {t.hero.warning}
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="#contact" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-purple-700 shadow-xl transition-all transform hover:scale-105 active:scale-95">
+          <div className="flex flex-col sm:flex-row justify-center gap-6">
+            <a href="#contact" className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-[#1B1464] text-white font-black rounded-3xl hover:bg-[#00A99D] shadow-2xl transition-all transform hover:scale-105 active:scale-95 uppercase tracking-widest text-sm">
               {t.hero.cta}
               <ChevronRight size={20} />
             </a>
-            <a href="https://wa.me/919585551021" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-emerald-600 text-white font-bold rounded-2xl hover:bg-emerald-700 shadow-xl transition-all transform hover:scale-105 active:scale-95">
-              <MessageCircle size={20} />
+            <a href="https://wa.me/919585551021" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-[#25D366] text-white font-black rounded-3xl hover:bg-[#128C7E] shadow-2xl transition-all transform hover:scale-105 active:scale-95 uppercase tracking-widest text-sm">
+              <MessageCircle size={24} />
               WhatsApp Now
             </a>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-20">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-24">
             {t.hero.stats.map((stat, index) => (
-              <div key={index} className="p-6 bg-white shadow-xl rounded-3xl border-b-4 border-purple-500">
-                <div className="text-3xl font-black text-slate-900">{stat.value}</div>
-                <div className="text-[10px] text-purple-600 font-black uppercase tracking-widest">{stat.label}</div>
+              <div key={index} className="p-8 bg-white shadow-2xl rounded-[2.5rem] border-b-[8px] border-[#00A99D]">
+                <div className="text-4xl font-black text-[#1B1464] mb-2">{stat.value}</div>
+                <div className="text-[10px] text-[#00A99D] font-black uppercase tracking-[0.2em]">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -440,31 +453,31 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-24 px-4 sm:px-6 lg:px-8 bg-white">
+      <section id="services" className="py-32 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-black mb-4 text-slate-900 tracking-tight">{t.services.title}</h2>
-            <div className="w-24 h-2 bg-emerald-500 mx-auto rounded-full mb-6"></div>
-            <p className="text-gray-600 font-bold text-lg">{t.services.subtitle}</p>
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-6xl font-black mb-6 text-[#1B1464] tracking-tighter uppercase">{t.services.title}</h2>
+            <div className="w-32 h-3 bg-[#00A859] mx-auto rounded-full mb-8"></div>
+            <p className="text-slate-600 font-bold text-xl uppercase tracking-widest leading-relaxed">{t.services.subtitle}</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-10">
             {t.services.items.map((service, index) => (
-              <div key={index} className="group p-10 bg-slate-50 rounded-[2.5rem] border-2 border-slate-100 hover:border-emerald-400 hover:bg-white hover:shadow-2xl transition-all">
-                <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-                  <div className="w-20 h-20 rounded-3xl bg-slate-900 flex items-center justify-center text-white flex-shrink-0 group-hover:scale-110 group-hover:bg-emerald-600 transition-all shadow-lg">
-                    {getIcon(service.icon, 'w-10 h-10')}
+              <div key={index} className="group p-12 bg-slate-50 rounded-[3rem] border-2 border-slate-100 hover:border-[#00A99D] hover:bg-white hover:shadow-[0_30px_60px_-15px_rgba(0,169,157,0.3)] transition-all">
+                <div className="flex flex-col md:flex-row items-center md:items-start gap-10">
+                  <div className="w-24 h-24 rounded-[2rem] bg-[#1B1464] flex items-center justify-center text-white flex-shrink-0 group-hover:scale-110 group-hover:bg-[#00A859] transition-all shadow-xl">
+                    {getIcon(service.icon, 'w-12 h-12')}
                   </div>
                   <div className="flex-1 text-center md:text-left">
-                    <span className="inline-block px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-black uppercase mb-4 tracking-widest">
+                    <span className="inline-block px-5 py-2 rounded-full bg-[#E6F4F3] text-[#00A99D] text-[10px] font-black uppercase mb-6 tracking-[0.2em]">
                       {service.badge}
                     </span>
-                    <h3 className="text-2xl font-black text-slate-900 mb-3">{service.title}</h3>
-                    <p className="text-gray-600 font-medium mb-6 leading-relaxed">{service.description}</p>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <h3 className="text-3xl font-black text-[#1B1464] mb-4 uppercase tracking-tighter">{service.title}</h3>
+                    <p className="text-slate-600 font-medium mb-8 text-lg leading-relaxed">{service.description}</p>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {service.features.map((f, i) => (
-                        <li key={i} className="flex items-center gap-2 text-xs font-bold text-slate-700">
-                          <CheckCircle className="text-emerald-500 w-4 h-4" />
+                        <li key={i} className="flex items-center gap-3 text-sm font-black text-slate-700">
+                          <CheckCircle className="text-[#00A859] w-5 h-5" />
                           {f}
                         </li>
                       ))}
@@ -478,31 +491,31 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-900 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
-          <Logo className="w-[1000px] h-[1000px] absolute top-[-200px] left-[-200px]" />
+      <section id="about" className="py-32 px-4 sm:px-6 lg:px-8 bg-[#1B1464] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-full h-full opacity-[0.03] pointer-events-none transform scale-150 rotate-12">
+          <Logo className="w-full h-full" dark />
         </div>
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="bg-white/5 backdrop-blur-lg rounded-[3rem] p-12 text-white border border-white/10 shadow-2xl">
-              <h2 className="text-4xl font-black mb-8 italic">{t.about.title}</h2>
-              <p className="text-xl leading-relaxed mb-10 text-slate-300 font-medium">{t.about.description}</p>
-              <div className="p-6 bg-emerald-500/10 rounded-2xl border-l-8 border-emerald-500">
-                <p className="text-base font-bold italic text-emerald-400">"{t.about.disclaimer}"</p>
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <div className="bg-white/5 backdrop-blur-2xl rounded-[4rem] p-16 text-white border border-white/10 shadow-3xl">
+              <h2 className="text-5xl font-black mb-10 italic uppercase tracking-tighter">{t.about.title}</h2>
+              <p className="text-2xl leading-relaxed mb-12 text-slate-300 font-medium">{t.about.description}</p>
+              <div className="p-8 bg-[#00A99D]/20 rounded-3xl border-l-[12px] border-[#00A99D]">
+                <p className="text-xl font-bold italic text-[#00A99D]">"{t.about.disclaimer}"</p>
               </div>
             </div>
-            <div className="flex flex-col gap-8">
-              <div className="flex items-center gap-8 p-8 bg-white/10 rounded-[2.5rem] border border-white/10">
-                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white text-4xl font-black shadow-2xl">
+            <div className="flex flex-col gap-10">
+              <div className="flex items-center gap-10 p-10 bg-white/10 rounded-[3rem] border border-white/10">
+                <div className="w-28 h-28 rounded-full bg-gradient-to-br from-[#00A859] to-[#8DC63F] flex items-center justify-center text-white text-5xl font-black shadow-2xl">
                   {t.about.founder.charAt(0)}
                 </div>
                 <div>
-                  <h3 className="text-3xl font-black text-white">{t.about.founder}</h3>
-                  <p className="text-emerald-400 font-black uppercase text-xs tracking-[0.2em]">{t.about.founderTitle}</p>
+                  <h3 className="text-4xl font-black text-white uppercase tracking-tighter">{t.about.founder}</h3>
+                  <p className="text-[#00A99D] font-black uppercase text-sm tracking-[0.3em] mt-2">{t.about.founderTitle}</p>
                 </div>
               </div>
-              <div className="bg-white/5 p-8 rounded-[2rem] border-l-8 border-purple-500">
-                <p className="text-slate-300 leading-relaxed text-xl italic font-medium">
+              <div className="bg-white/5 p-10 rounded-[3rem] border-l-[12px] border-emerald-500 shadow-xl">
+                <p className="text-slate-300 leading-relaxed text-2xl italic font-medium">
                   {t.about.founderBio}
                 </p>
               </div>
@@ -511,46 +524,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Legal Section */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-amber-50">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-block p-4 bg-amber-400 text-white rounded-[2rem] mb-8 shadow-xl">
-            <ShieldAlert size={40} />
-          </div>
-          <h2 className="text-4xl font-black mb-12 text-amber-950 uppercase tracking-tighter">{t.legalSection.title}</h2>
-          <div className="grid gap-5 text-left">
-            {t.legalSection.points.map((point, i) => (
-              <div key={i} className="flex gap-5 p-6 bg-white rounded-3xl shadow-md border-2 border-amber-100 transform transition-all hover:scale-[1.02]">
-                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center text-sm font-black">{i + 1}</span>
-                <p className="text-amber-950 font-black leading-tight">{point}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Contact Section */}
-      <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 bg-white">
+      <section id="contact" className="py-32 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-20">
+          <div className="grid lg:grid-cols-2 gap-24">
             <div>
-              <h2 className="text-5xl font-black mb-6 text-slate-900 tracking-tighter">{t.contact.title}</h2>
-              <div className="w-20 h-2 bg-purple-600 mb-10 rounded-full"></div>
-              <p className="text-gray-600 font-bold text-xl mb-12">{t.contact.subtitle}</p>
+              <h2 className="text-5xl md:text-7xl font-black mb-8 text-[#1B1464] tracking-tighter uppercase">{t.contact.title}</h2>
+              <div className="w-24 h-3 bg-[#00A99D] mb-12 rounded-full"></div>
+              <p className="text-slate-500 font-black text-2xl mb-16 uppercase tracking-widest">{t.contact.subtitle}</p>
 
-              <div className="space-y-8">
+              <div className="space-y-10">
                 {t.contact.info.map((info, idx) => (
-                  <div key={idx} className="flex items-start gap-6 group">
-                    <div className="w-16 h-16 rounded-2xl bg-slate-50 text-slate-900 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-sm">
-                      {getIcon(info.icon, 'w-8 h-8')}
+                  <div key={idx} className="flex items-start gap-8 group">
+                    <div className="w-20 h-20 rounded-3xl bg-slate-100 text-[#1B1464] flex items-center justify-center flex-shrink-0 group-hover:bg-[#00A859] group-hover:text-white transition-all shadow-md">
+                      {getIcon(info.icon, 'w-10 h-10')}
                     </div>
-                    <div>
-                      <div className="text-xs text-purple-600 uppercase font-black tracking-widest mb-1">{info.label}</div>
+                    <div className="flex-1">
+                      <div className="text-xs text-[#00A99D] uppercase font-black tracking-[0.2em] mb-2">{info.label}</div>
                       <a
                         href={info.href}
                         target={info.href?.startsWith('http') ? "_blank" : "_self"}
                         rel="noopener noreferrer"
-                        className="text-slate-900 font-black text-xl md:text-2xl leading-tight hover:text-emerald-600 transition-colors"
+                        className="text-[#1B1464] font-black text-2xl md:text-3xl leading-tight hover:text-[#00A99D] transition-colors break-words"
                       >
                         {info.value}
                       </a>
@@ -558,26 +553,46 @@ export default function Home() {
                   </div>
                 ))}
               </div>
+
+              {/* Real Map Preview Placeholder */}
+              <div className="mt-16 rounded-[3rem] overflow-hidden border-4 border-slate-100 shadow-2xl group relative cursor-pointer">
+                <a href={t.contact.info.find(i => i.icon === 'location')?.href} target="_blank" rel="noopener noreferrer">
+                  <img
+                    src="https://maps.googleapis.com/maps/api/staticmap?center=Tirunelveli+Collectorate&zoom=15&size=800x400&maptype=roadmap&markers=color:red%7Clabel:R%7CTirunelveli+Collectorate&key=YOUR_API_KEY_HERE"
+                    alt="Tirunelveli Map"
+                    className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=800&h=400";
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1B1464]/80 to-transparent flex items-end p-10">
+                    <div className="text-white">
+                      <div className="font-black text-xl uppercase tracking-widest mb-2">View on Google Maps</div>
+                      <p className="text-slate-300 font-medium">No. 3/1, Near Collectorate, Tirunelveli</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
             </div>
 
             <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-br from-emerald-400 to-purple-600 rounded-[3rem] opacity-10 blur-2xl"></div>
-              <div className="relative bg-white p-10 md:p-14 rounded-[2.5rem] border-2 border-slate-100 shadow-2xl">
-                <form className="space-y-6">
-                  <div className="space-y-2">
-                    <label className="text-xs font-black uppercase text-slate-500 ml-2">Full Name</label>
-                    <input type="text" placeholder={t.contact.form.name} className="w-full px-6 py-4 rounded-2xl border-2 border-slate-100 focus:border-emerald-500 outline-none font-bold placeholder:text-slate-300 transition-all" />
+              <div className="absolute -inset-8 bg-gradient-to-br from-[#00A99D] to-[#1B1464] rounded-[5rem] opacity-10 blur-[100px]"></div>
+              <div className="relative bg-white p-12 md:p-16 rounded-[4rem] border-2 border-slate-50 shadow-[0_50px_100px_-20px_rgba(27,20,100,0.15)]">
+                <form className="space-y-8">
+                  <div className="space-y-3">
+                    <label className="text-xs font-black uppercase text-slate-400 tracking-[0.2em] ml-4">Full Name</label>
+                    <input type="text" placeholder={t.contact.form.name} className="w-full px-8 py-5 rounded-3xl bg-slate-50 border-2 border-transparent focus:border-[#00A99D] focus:bg-white outline-none font-black placeholder:text-slate-300 transition-all text-lg" />
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-xs font-black uppercase text-slate-500 ml-2">Email Address</label>
-                    <input type="email" placeholder={t.contact.form.email} className="w-full px-6 py-4 rounded-2xl border-2 border-slate-100 focus:border-emerald-500 outline-none font-bold placeholder:text-slate-300 transition-all" />
+                  <div className="space-y-3">
+                    <label className="text-xs font-black uppercase text-slate-400 tracking-[0.2em] ml-4">Email Address</label>
+                    <input type="email" placeholder={t.contact.form.email} className="w-full px-8 py-5 rounded-3xl bg-slate-50 border-2 border-transparent focus:border-[#00A99D] focus:bg-white outline-none font-black placeholder:text-slate-300 transition-all text-lg" />
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-xs font-black uppercase text-slate-500 ml-2">How can we help?</label>
-                    <textarea placeholder={t.contact.form.message} rows={5} className="w-full px-6 py-4 rounded-2xl border-2 border-slate-100 focus:border-emerald-500 outline-none font-bold placeholder:text-slate-300 resize-none transition-all"></textarea>
+                  <div className="space-y-3">
+                    <label className="text-xs font-black uppercase text-slate-400 tracking-[0.2em] ml-4">Requirement Details</label>
+                    <textarea placeholder={t.contact.form.message} rows={5} className="w-full px-8 py-5 rounded-3xl bg-slate-50 border-2 border-transparent focus:border-[#00A99D] focus:bg-white outline-none font-black placeholder:text-slate-300 resize-none transition-all text-lg"></textarea>
                   </div>
-                  <button className="w-full py-5 bg-slate-900 text-white font-black rounded-2xl hover:bg-emerald-600 shadow-xl active:scale-95 transition-all flex items-center justify-center gap-3 text-lg uppercase tracking-widest">
-                    <Send size={24} />
+                  <button className="w-full py-6 bg-[#1B1464] text-white font-black rounded-3xl hover:bg-[#00A859] shadow-2xl active:scale-95 transition-all flex items-center justify-center gap-4 text-xl uppercase tracking-[0.2em]">
+                    <Send size={28} />
                     {t.contact.form.send}
                   </button>
                 </form>
@@ -588,30 +603,31 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-950 text-white py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col lg:flex-row justify-between items-center gap-12 mb-16 border-b border-slate-800 pb-16">
-            <div className="text-center lg:text-left flex items-center gap-4">
-              <Logo className="w-20 h-20" />
+      <footer className="bg-[#1B1464] text-white py-24 px-4 overflow-hidden relative">
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-16 border-b border-white/10 pb-20 mb-20">
+            <div className="text-center lg:text-left flex flex-col items-center lg:items-start gap-6">
+              <Logo className="w-32 h-32 md:w-40 md:h-40" dark />
               <div>
-                <div className="text-2xl font-black mb-1 leading-none">Rising <span className="text-purple-500">Documentation</span></div>
-                <div className="text-emerald-500 text-[10px] font-black uppercase tracking-[0.3em]">{t.heroBadge}</div>
+                <div className="text-3xl md:text-5xl font-black mb-2 leading-none tracking-tighter uppercase italic">RISING</div>
+                <div className="text-lg md:text-2xl font-black mb-1 leading-none tracking-tighter uppercase opacity-80">DOCUMENTATION</div>
+                <div className="text-[#00A99D] text-xs font-black uppercase tracking-[0.4em] mt-3 border-t border-[#00A99D]/30 pt-2 text-center lg:text-left">Registration Solutions</div>
               </div>
             </div>
-            <div className="flex flex-wrap justify-center gap-8 text-xs font-black uppercase tracking-widest">
-              <a href="#services" className="hover:text-emerald-400 transition-colors uppercase tracking-widest">{t.nav.services}</a>
-              <a href="#about" className="hover:text-emerald-400 transition-colors uppercase tracking-widest">{t.nav.about}</a>
-              <a href="#contact" className="hover:text-emerald-400 transition-colors uppercase tracking-widest">{t.nav.contact}</a>
+            <div className="flex flex-wrap justify-center gap-10 text-xs font-black uppercase tracking-[0.3em] font-mono">
+              <a href="#services" className="hover:text-[#00A99D] transition-colors">{t.nav.services}</a>
+              <a href="#about" className="hover:text-[#00A99D] transition-colors">{t.nav.about}</a>
+              <a href="#contact" className="hover:text-[#00A99D] transition-colors">{t.nav.contact}</a>
             </div>
           </div>
           <div className="text-center">
-            <div className="inline-block px-6 py-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 rounded-full text-[10px] font-black uppercase tracking-widest mb-6">
+            <div className="inline-block px-8 py-3 bg-[#00A99D]/10 border border-[#00A99D]/20 text-[#00A99D] rounded-full text-[10px] font-black uppercase tracking-[0.4em] mb-10 shadow-lg">
               ⚠️ Independent Private Service Provider • Not a government portal
             </div>
-            <p className="text-slate-500 text-xs font-bold leading-relaxed">
-              © 2025 Rising Documentation - Registration Solutions. S. Jameela, Tirunelveli.
+            <p className="text-slate-400 text-xs font-bold leading-relaxed max-w-2xl mx-auto uppercase tracking-widest opacity-60">
+              © 2025 {businessName}.
               <br />
-              Registration solutions and professional document assistance for Tamil Nadu.
+              S. Jameela, Tirunelveli. Registration solutions and professional assistance for Tamil Nadu.
             </p>
           </div>
         </div>
@@ -619,12 +635,12 @@ export default function Home() {
 
       <style jsx global>{`
         @keyframes slide-down {
-          from { opacity: 0; transform: translateY(-10px); }
+          from { opacity: 0; transform: translateY(-30px); }
           to { opacity: 1; transform: translateY(0); }
         }
-        .animate-slide-down { animation: slide-down 0.3s ease-out; }
+        .animate-slide-down { animation: slide-down 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         html { scroll-behavior: smooth; }
-        body { color: #0f172a; }
+        body { color: #1e293b; background-color: #ffffff; }
       `}</style>
     </div>
   );
